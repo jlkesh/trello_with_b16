@@ -1,0 +1,9 @@
+openapi: 3.0.3
+info:
+  title: Trello Application
+  description: Trello Application
+  version: 1.0.0
+servers:
+  - url: 'https://pdp.uz'
+paths:
+  - url: 'https://github.com/jlkesh'
