@@ -23,10 +23,9 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @MappedSuperclass
 @EntityListeners(AuditListener.class)
-public abstract class Auditable {
+public class Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

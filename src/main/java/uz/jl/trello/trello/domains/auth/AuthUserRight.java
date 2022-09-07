@@ -3,9 +3,8 @@ package uz.jl.trello.trello.domains.auth;
 import lombok.*;
 import uz.jl.trello.trello.domains.Auditable;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author "Elmurodov Javohir"
@@ -14,7 +13,7 @@ import javax.persistence.UniqueConstraint;
  */
 
 
-@Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,13 +21,23 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "user_id_workspace_id_auth_role_id_unique_key",
-                columnNames = {"userId", "workspaceId", "roleId"}
+                columnNames = {"user.id", "workspaceId", "role.id"}
         )
 })
 public class AuthUserRight extends Auditable {
 
-    private Long userId;
+    @ManyToOne
+    private AuthUser user;
     private Long workspaceId;
-    private Long roleId;
 
+    @OneToOne
+    private AuthRole role;
+
+    @Builder(builderMethodName = "childBuilder")
+    public AuthUserRight(Long id, boolean deleted, LocalDateTime createdAt, Long createdBy, LocalDateTime updatedAt, Long updatedBy, AuthUser user, Long workspaceId, AuthRole role) {
+        super(id, deleted, createdAt, createdBy, updatedAt, updatedBy);
+        this.user = user;
+        this.workspaceId = workspaceId;
+        this.role = role;
+    }
 }

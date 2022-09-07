@@ -3,11 +3,9 @@ package uz.jl.trello.trello.domains.auth;
 import lombok.*;
 import uz.jl.trello.trello.domains.Auditable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 /**
  * @author "Elmurodov Javohir"
@@ -16,7 +14,7 @@ import java.time.LocalDateTime;
  */
 
 
-@Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,7 +28,6 @@ public class AuthUser extends Auditable {
     @Column(nullable = false)
     private String password;
 
-    @Builder.Default
     @Enumerated(EnumType.STRING)
     private Status status = Status.NOT_ACTIVE;
 
@@ -40,6 +37,21 @@ public class AuthUser extends Auditable {
     private LocalDateTime lastLoginAt;
 
     private Integer loginTryCount;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<AuthUserRight> userRights;
+
+    @Builder(builderMethodName = "childBuilder")
+    public AuthUser(Long id, boolean deleted, LocalDateTime createdAt, Long createdBy, LocalDateTime updatedAt, Long updatedBy, String username, String password, Status status, String email, LocalDateTime lastLoginAt, Integer loginTryCount, Collection<AuthUserRight> userRights) {
+        super(id, deleted, createdAt, createdBy, updatedAt, updatedBy);
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.email = email;
+        this.lastLoginAt = lastLoginAt;
+        this.loginTryCount = loginTryCount;
+        this.userRights = userRights;
+    }
 
     public enum Status {
         ACTIVE,

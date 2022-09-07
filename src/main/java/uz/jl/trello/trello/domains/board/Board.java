@@ -6,6 +6,7 @@ import uz.jl.trello.trello.domains.auth.UserDetails;
 import uz.jl.trello.trello.domains.filestorage.Uploads;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Collection;
  * trello/IntelliJ IDEA
  */
 
-@Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,6 +44,16 @@ public class Board extends Auditable {
     )
     private Collection<UserDetails> members;
 
+    @Builder(builderMethodName = "childBuilder")
+    public Board(Long id, boolean deleted, LocalDateTime createdAt, Long createdBy, LocalDateTime updatedAt, Long updatedBy, String title, String description, Uploads documentation, Collection<BoardColumn> boardColumns, BoardVisibility boardVisibility, Collection<UserDetails> members) {
+        super(id, deleted, createdAt, createdBy, updatedAt, updatedBy);
+        this.title = title;
+        this.description = description;
+        this.documentation = documentation;
+        this.boardColumns = boardColumns;
+        this.boardVisibility = boardVisibility;
+        this.members = members;
+    }
 
     private enum BoardVisibility {
         PRIVATE, WORKSPACE;

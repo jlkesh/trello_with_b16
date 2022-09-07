@@ -1,13 +1,9 @@
 package uz.jl.trello.trello.domains.auth;
 
 import lombok.*;
-import org.hibernate.annotations.Formula;
 import uz.jl.trello.trello.domains.filestorage.Uploads;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * @author "Elmurodov Javohir"
@@ -21,14 +17,15 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "user_detail")
 public class UserDetails {
 
     @Id
-    @OneToOne(targetEntity = AuthUser.class)
+    @Column(unique = true, nullable = false)
     private Long userId;
 
     @OneToOne(targetEntity = Uploads.class)
-    private Long userProfilePictureId;
+    private Uploads userProfilePicture;
 
     @Column(nullable = false)
     private String firstName;
@@ -38,6 +35,5 @@ public class UserDetails {
 
     private String patronymic;
 
-    @Formula("firstName || ' ' || lastName || ' ' || patryonic")
     private String fullName;
 }

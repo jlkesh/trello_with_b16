@@ -6,6 +6,7 @@ import uz.jl.trello.trello.domains.Auditable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDateTime;
 
 /**
  * @author "Elmurodov Javohir"
@@ -14,7 +15,7 @@ import javax.persistence.Enumerated;
  */
 
 
-@Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,6 +27,13 @@ public class TaskComment extends Auditable {
 
     @Enumerated(EnumType.STRING)
     private TaskCommentType taskCommentType;
+
+    @Builder(builderMethodName = "childBuilder")
+    public TaskComment(Long id, boolean deleted, LocalDateTime createdAt, Long createdBy, LocalDateTime updatedAt, Long updatedBy, String message, TaskCommentType taskCommentType) {
+        super(id, deleted, createdAt, createdBy, updatedAt, updatedBy);
+        this.message = message;
+        this.taskCommentType = taskCommentType;
+    }
 
     public enum TaskCommentType {
         INFO, ERROR, SOLUTION;

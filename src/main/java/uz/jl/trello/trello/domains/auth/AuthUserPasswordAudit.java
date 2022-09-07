@@ -6,6 +6,7 @@ import uz.jl.trello.trello.domains.Auditable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 /**
  * @author "Elmurodov Javohir"
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
  * trello/IntelliJ IDEA
  */
 
-@Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,4 +31,11 @@ public class AuthUserPasswordAudit extends Auditable {
     @ManyToOne
     private AuthUser authUser;
 
+    @Builder(builderMethodName = "childBuilder")
+    public AuthUserPasswordAudit(Long id, boolean deleted, LocalDateTime createdAt, Long createdBy, LocalDateTime updatedAt, Long updatedBy, String oldPassword, String currentPassword, AuthUser authUser) {
+        super(id, deleted, createdAt, createdBy, updatedAt, updatedBy);
+        this.oldPassword = oldPassword;
+        this.currentPassword = currentPassword;
+        this.authUser = authUser;
+    }
 }

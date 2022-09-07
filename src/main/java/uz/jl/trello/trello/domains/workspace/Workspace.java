@@ -7,6 +7,7 @@ import uz.jl.trello.trello.domains.board.Board;
 import uz.jl.trello.trello.domains.filestorage.Uploads;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
@@ -15,14 +16,14 @@ import java.util.Collection;
  * trello/IntelliJ IDEA
  */
 
-@Builder
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "title_auth_user_unique_key", columnNames = {"title", "created_by"})
+        @UniqueConstraint(name = "title_auth_user_unique_key", columnNames = {"title", "createdBy"})
 })
 public class Workspace extends Auditable {
 
@@ -50,6 +51,19 @@ public class Workspace extends Auditable {
             inverseJoinColumns = @JoinColumn(name = "user_details_id", referencedColumnName = "userId")
     )
     private Collection<UserDetails> members;
+
+
+    @Builder(builderMethodName = "childBuilder")
+    public Workspace(Long id, boolean deleted, LocalDateTime createdAt, Long createdBy, LocalDateTime updatedAt, Long updatedBy, String title, String description, Uploads background, Collection<Board> boards, WorkspaceType workspaceType, WorkspaceVisibility workspaceVisibility, Collection<UserDetails> members) {
+        super(id, deleted, createdAt, createdBy, updatedAt, updatedBy);
+        this.title = title;
+        this.description = description;
+        this.background = background;
+        this.boards = boards;
+        this.workspaceType = workspaceType;
+        this.workspaceVisibility = workspaceVisibility;
+        this.members = members;
+    }
 
     public enum WorkspaceType {
         IT, MARKETING, SALES, EDUCATION, OTHER;

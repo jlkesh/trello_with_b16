@@ -3,6 +3,7 @@ package uz.jl.trello.trello.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,8 +17,8 @@ public class WorkspaceController {
 
 
     @PostMapping
-    @PreAuthorize("hasPermission('CREATE_BOARD')")
-    public ResponseEntity<Void> create(Object object) {
+    @PreAuthorize("hasPermission( #name,'CREATE_BOARD')")
+    public ResponseEntity<Void> create(@RequestBody String name) {
         return ResponseEntity.noContent().build();
     }
 
