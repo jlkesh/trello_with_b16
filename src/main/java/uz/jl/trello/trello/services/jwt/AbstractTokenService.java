@@ -21,11 +21,10 @@ public class AbstractTokenService {
 
 
     protected String getSubject(String token, String secret) {
-        Claims claims=new DefaultClaims();
         return getClaim(token, Claims::getSubject, secret);
     }
 
-    private  <T> T getClaim(String token, Function<Claims, T> func, String secret) {
+    private <T> T getClaim(String token, Function<Claims, T> func, String secret) {
         Jws<Claims> claimsJws = jwtClaims(token, secret);
         Claims claims = claimsJws.getBody();
         return func.apply(claims);
@@ -54,6 +53,7 @@ public class AbstractTokenService {
                 .setSubject(subject)
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(now.plus(amountToAdd, unit)))
+                //.setClaims(Map.of(Claims.ID, UUID.randomUUID()))
                 .signWith(algorithm, secret);
     }
 

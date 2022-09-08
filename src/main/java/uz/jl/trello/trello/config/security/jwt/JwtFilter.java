@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import uz.jl.trello.trello.services.auth.UserService;
+import uz.jl.trello.trello.services.auth.AuthService;
 import uz.jl.trello.trello.services.jwt.AccessTokenService;
 import uz.jl.trello.trello.utils.JwtUtils;
 
@@ -30,7 +30,7 @@ import java.util.function.Function;
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final UserService userService;
+    private final AuthService userService;
     private final static List<String> WHITE_LIST = List.of(
             "/auth/login",
             "/auth/register",

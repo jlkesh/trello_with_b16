@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class WorkspaceController {
 
 
+
     @PostMapping
-    @PreAuthorize("hasPermission( #name,'CREATE_BOARD')")
+    @PreAuthorize("hasRole('CREATE_BOARD')")
     public ResponseEntity<Void> create(@RequestBody String name) {
         return ResponseEntity.noContent().build();
     }

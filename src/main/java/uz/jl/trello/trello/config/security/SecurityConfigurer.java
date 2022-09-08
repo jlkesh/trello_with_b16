@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import uz.jl.trello.trello.config.security.jwt.JwtFilter;
-import uz.jl.trello.trello.services.auth.UserService;
+import uz.jl.trello.trello.services.auth.AuthService;
 
 /**
  * @author "Otajonov Dilshodbek
@@ -24,7 +24,7 @@ import uz.jl.trello.trello.services.auth.UserService;
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor
 public class SecurityConfigurer {
-    private final UserService userService;
+    private final AuthService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
