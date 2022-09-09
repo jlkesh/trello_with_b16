@@ -10,7 +10,7 @@ import java.util.List;
  * trello/IntelliJ IDEA
  */
 
-public interface BaseMapper<E, D, CD, UD> {
+public interface BaseMapper<E, D, CD, UD> extends GenericMapper {
 
     E fromDto(D dto);
 

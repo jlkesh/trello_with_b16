@@ -10,6 +10,6 @@ import java.util.Optional;
  * @since 07/09/22/18:24 (Wednesday)
  * trello/IntelliJ IDEA
  */
-public interface AuthUserRepository extends JpaRepository<AuthUser, Long> {
+public interface AuthUserRepository extends JpaRepository<AuthUser, Long>, GenericRepository {
     Optional<AuthUser> findByUsername(String username);
 }

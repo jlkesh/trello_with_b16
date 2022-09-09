@@ -10,7 +10,7 @@ import uz.jl.trello.trello.dtos.auth.request.AccessTokenRequest;
 import uz.jl.trello.trello.dtos.auth.request.RefreshTokenRequest;
 import uz.jl.trello.trello.dtos.auth.response.TokenResponse;
 import uz.jl.trello.trello.repositories.AuthUserRepository;
-import uz.jl.trello.trello.services.BaseService;
+import uz.jl.trello.trello.services.base.BaseService;
 import uz.jl.trello.trello.services.jwt.AccessTokenService;
 import uz.jl.trello.trello.services.jwt.RefreshTokenService;
 
@@ -52,7 +52,7 @@ public class AuthService implements UserDetailsService, BaseService {
             throw new RuntimeException("Token is invalid");
         }
         String username = refreshTokenService.getSubject(refreshToken);
-        SecurityUserDetails userDetails =z loadUserByUsername(username);
+        SecurityUserDetails userDetails = loadUserByUsername(username);
         String accessToken = accessTokenService.generateToken(userDetails);
         return new TokenResponse(accessToken, refreshToken, username);
     }

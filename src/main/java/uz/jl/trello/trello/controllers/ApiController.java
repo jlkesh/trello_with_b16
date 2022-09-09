@@ -1,7 +1,7 @@
 package uz.jl.trello.trello.controllers;
 
 import lombok.RequiredArgsConstructor;
-import uz.jl.trello.trello.services.BaseService;
+import uz.jl.trello.trello.services.base.BaseService;
 
 /**
  * @author "Elmurodov Javohir"

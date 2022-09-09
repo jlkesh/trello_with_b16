@@ -1,4 +1,4 @@
-package uz.jl.trello.trello.services;
+package uz.jl.trello.trello.services.base;
 
 /**
  * @author "Elmurodov Javohir"
