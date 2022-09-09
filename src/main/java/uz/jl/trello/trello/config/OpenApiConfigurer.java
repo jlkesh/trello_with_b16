@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(
         info = @Info(title = "First Step Forward API", version = "v1",
                 description = "This API just for learning purposes",
-                contact = @Contact(name = "Dilshodbek", url = "https://pdp.uz", email = "john.lgd65@gmail.com"),
+                contact = @Contact(name = "B16", url = "https://pdp.uz", email = "john.lgd65@gmail.com"),
                 license = @License(name = "Apache Foundation", url = "http://apache.org")
         ),
         security = {

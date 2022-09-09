@@ -52,7 +52,7 @@ public class AuthService implements UserDetailsService, BaseService {
             throw new RuntimeException("Token is invalid");
         }
         String username = refreshTokenService.getSubject(refreshToken);
-        SecurityUserDetails userDetails = loadUserByUsername(username);
+        SecurityUserDetails userDetails =z loadUserByUsername(username);
         String accessToken = accessTokenService.generateToken(userDetails);
         return new TokenResponse(accessToken, refreshToken, username);
     }

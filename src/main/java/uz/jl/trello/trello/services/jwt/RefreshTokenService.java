@@ -2,6 +2,7 @@ package uz.jl.trello.trello.services.jwt;
 
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import uz.jl.trello.trello.config.security.SecurityUserDetails;
 
 import java.time.temporal.ChronoUnit;
@@ -12,16 +13,18 @@ import java.time.temporal.TemporalUnit;
  * @since 8/20/22 11:13 AM (Saturday)
  * Project_Blueprint/IntelliJ IDEA
  */
+
+@Service
 public class RefreshTokenService extends AbstractTokenService implements TokenService {
 
     @Value("${jwt.refresh.token.secret}")
-    private String refreshTokenSecret="c2RGJF4lJiVeKERGR05NU0RGR0xFRktHREZMT0pUIylUIyQlXiMkJV9eJCVe";
+    private String refreshTokenSecret;
 
     @Value("${jwt.refresh.token.expiry.adding.amount}")
-    private Integer amountToAdd=10;
+    private Integer amountToAdd;
 
     @Value("${jwt.refresh.token.expiry.time.unit}")
-    private TemporalUnit unit= ChronoUnit.DAYS;
+    private String unit;
 
 
     @Override
@@ -42,6 +45,6 @@ public class RefreshTokenService extends AbstractTokenService implements TokenSe
 
 
     public String jwt(@NonNull String subject) {
-        return super.jwt(subject, this.refreshTokenSecret, this.amountToAdd, this.unit);
+        return super.jwt(subject, this.refreshTokenSecret, this.amountToAdd,  ChronoUnit.valueOf(this.unit));
     }
 }

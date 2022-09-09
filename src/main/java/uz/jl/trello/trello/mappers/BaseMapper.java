@@ -9,6 +9,7 @@ import java.util.List;
  * @since 08/09/22/19:48 (Thursday)
  * trello/IntelliJ IDEA
  */
+
 public interface BaseMapper<E, D, CD, UD> {
 
     E fromDto(D dto);

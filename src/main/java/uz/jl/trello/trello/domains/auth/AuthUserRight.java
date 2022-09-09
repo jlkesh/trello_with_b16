@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "user_id_workspace_id_auth_role_id_unique_key",
-                columnNames = {"user.id", "workspaceId", "role.id"}
+                columnNames = {"user_id", "workspaceId", "role_id"}
         )
 })
 public class AuthUserRight extends Auditable {

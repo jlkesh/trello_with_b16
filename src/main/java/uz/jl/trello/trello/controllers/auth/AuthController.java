@@ -1,10 +1,11 @@
-package uz.jl.trello.trello.controllers;
+package uz.jl.trello.trello.controllers.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import uz.jl.trello.trello.controllers.ApiController;
 import uz.jl.trello.trello.dtos.auth.request.AccessTokenRequest;
 import uz.jl.trello.trello.dtos.auth.request.RefreshTokenRequest;
 import uz.jl.trello.trello.dtos.auth.response.TokenResponse;

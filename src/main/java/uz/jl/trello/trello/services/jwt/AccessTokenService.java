@@ -2,6 +2,7 @@ package uz.jl.trello.trello.services.jwt;
 
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import uz.jl.trello.trello.config.security.SecurityUserDetails;
 
 import java.time.temporal.ChronoUnit;
@@ -12,16 +13,17 @@ import java.time.temporal.TemporalUnit;
  * @since 8/20/22 11:13 AM (Saturday)
  * Project_Blueprint/IntelliJ IDEA
  */
+@Service
 public class AccessTokenService extends AbstractTokenService implements TokenService {
 
     @Value("${jwt.access.token.secret}")
-    private String accessTokenSecret="U0RGVyQ0MzUzZnNkRyUkXiQlXjxERkhHPE9ZVUslJF4+SkhGR0pUUllVJV4=";
+    private String accessTokenSecret;
 
     @Value("${jwt.access.token.expiry.adding.amount}")
-    private Integer amountToAdd = 10;
+    private Integer amountToAdd;
 
     @Value("${jwt.access.token.expiry.time.unit}")
-    private TemporalUnit unit= ChronoUnit.MINUTES;
+    private String unit;
 
 
     @Override
@@ -41,6 +43,6 @@ public class AccessTokenService extends AbstractTokenService implements TokenSer
 
 
     public String jwt(@NonNull String subject) {
-        return super.jwt(subject, this.accessTokenSecret, this.amountToAdd, this.unit);
+        return super.jwt(subject, this.accessTokenSecret, this.amountToAdd, ChronoUnit.valueOf(this.unit));
     }
 }

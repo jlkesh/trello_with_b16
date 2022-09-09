@@ -37,7 +37,7 @@ public record SecurityUserDetails(AuthUser authUser) implements UserDetails {
 
     @Override
     public String getUsername() {
-        return authUser.getEmail();
+        return authUser.getUsername();
     }
 
     @Override

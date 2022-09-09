@@ -29,11 +29,12 @@ public class SecurityConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests(expressionInterceptUrlRegistry ->expressionInterceptUrlRegistry
-                .antMatchers("/auth/login",
-                        "/auth/register",
-                        "/swagger-ui/**",
-                        "/api-docs/**"
+        http.authorizeRequests(expressionInterceptUrlRegistry -> expressionInterceptUrlRegistry
+                .antMatchers(
+                        "/api/v1/auth/access/token",
+                        "/api/v1/auth/refresh/token",
+                        "/api/v1/user/register", "/swagger-ui/**",
+                        "/v3/api-docs/**"
                 ).permitAll()
                 .anyRequest().authenticated()
         );
